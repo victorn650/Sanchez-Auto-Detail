@@ -1,148 +1,24 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import cloudflareLogo from './assets/cloudflare.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
-
+const phone = 'tel:+15551234567'
+const services = [
+  { number: '01', title: 'Exterior Detail', price: 'From $149', text: 'A meticulous hand wash, paint decontamination, wheel care, and premium protection for a deep, lasting shine.' },
+  { number: '02', title: 'Interior Detail', price: 'From $179', text: 'Deep vacuuming, steam cleaning, leather conditioning, and precise finishing across every surface and seam.' },
+  { number: '03', title: 'Full Detail', price: 'From $289', text: 'Our complete inside-and-out reset. The ideal choice when your vehicle deserves the full Sanchez treatment.' },
+]
+function Arrow() { return <span aria-hidden="true">→</span> }
 function App() {
-  const [count, setCount] = useState(0)
-  const [name, setName] = useState('unknown')
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started with Cloudflare</h1>
-          <p>
-            Edit <code>src/App.tsx</code> or <code>worker/index.ts</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none', padding: 0 }}>
-          <li>
-            <button
-              className="counter"
-              onClick={() => setCount((count) => count + 1)}
-            >
-              Count is {count}
-            </button>
-          </li>
-          <li>
-          <button
-            className="counter"
-            onClick={() => {
-              fetch('/api/')
-                .then((res) => res.json())
-                .then((data) => setName(data.name))
-            }}
-            aria-label='get name'
-          >
-            Name from API is: {name}
-          </button>
-          </li>
-        </ul>
-
-
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-            <li>
-              <a href="https://workers.cloudflare.com/" target="_blank">
-                <img className="button-icon" src={cloudflareLogo} alt="" />
-                Workers Docs
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+  const [menuOpen, setMenuOpen] = useState(false)
+  return <div className="site-shell">
+    <header className="hero" id="top"><div className="hero-image" role="img" aria-label="Black sports car being washed in a detailing studio" /><div className="hero-overlay" />
+      <nav className="nav container" aria-label="Main navigation"><a className="brand" href="#top" aria-label="Sanchez Auto Detailing home"><span className="brand-mark">S</span><span><strong>SANCHEZ</strong><small>AUTO DETAILING</small></span></a><button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu"><span /><span /></button><div className={`nav-links ${menuOpen ? 'open' : ''}`}><a href="#services" onClick={() => setMenuOpen(false)}>Services</a><a href="#about" onClick={() => setMenuOpen(false)}>Why us</a><a href="#reviews" onClick={() => setMenuOpen(false)}>Reviews</a><a className="button button-small" href={phone}>Book a detail <Arrow /></a></div></nav>
+      <div className="hero-content container"><p className="eyebrow"><i /> Premium mobile detailing</p><h1>Drive clean.<br /><em>Feel different.</em></h1><p className="hero-copy">Professional auto detailing with obsessive attention to every finish, surface, and reflection.</p><div className="hero-actions"><a className="button" href={phone}>Schedule your detail <Arrow /></a><a className="text-link" href="#services">Explore services <Arrow /></a></div></div>
+      <div className="metrics container"><div><strong>4.9</strong><span>Google rating</span></div><div><strong>500+</strong><span>Cars detailed</span></div><div><strong>100%</strong><span>Satisfaction</span></div></div>
+    </header>
+    <main><section className="section services container" id="services"><div className="section-intro"><div><p className="eyebrow dark"><i /> Our services</p><h2>More than clean.<br /><em>Meticulously restored.</em></h2></div><p>Every service is performed with professional-grade products and a standard of care that treats your vehicle like our own.</p></div><div className="service-grid">{services.map((service) => <article className="service-card" key={service.number}><span className="service-number">{service.number}</span><h3>{service.title}</h3><p>{service.text}</p><div className="service-footer"><strong>{service.price}</strong><a href={phone} aria-label={`Book ${service.title}`}>Book now <Arrow /></a></div></article>)}</div></section>
+      <section className="standard" id="about"><div className="standard-image" role="img" aria-label="Detailer applying foam to a black sports car"><span className="experience"><strong>7+</strong><small>Years of experience</small></span></div><div className="standard-copy"><p className="eyebrow dark"><i /> The Sanchez standard</p><h2>Details make<br /><em>the difference.</em></h2><p>We built Sanchez Auto Detailing around one simple belief: your car should leave looking better than you thought possible.</p><ul><li>Professional-grade products</li><li>Fully mobile and convenient</li><li>Licensed, insured, and trusted</li></ul><a className="button button-dark" href={phone}>Get your free quote <Arrow /></a></div></section>
+      <section className="review" id="reviews"><div className="quote-mark">“</div><blockquote>My car looks better than the day I bought it. The attention to detail is unmatched—and they came right to my driveway.</blockquote><div className="reviewer"><span>JM</span><div><strong>Jordan M.</strong><small>Full detail customer</small></div></div></section><section className="cta"><p className="eyebrow"><i /> Ready when you are</p><h2>Give your car the care<br /><em>it deserves.</em></h2><p>Call or text us for a fast, free quote.</p><a className="button" href={phone}>Call (555) 123–4567 <Arrow /></a></section></main>
+    <footer className="footer container"><a className="brand" href="#top"><span className="brand-mark">S</span><span><strong>SANCHEZ</strong><small>AUTO DETAILING</small></span></a><p>Premium mobile detailing.<br />Proudly serving our local community.</p><small>© 2025 Sanchez Auto Detailing</small></footer>
+  </div>
 }
-
 export default App
