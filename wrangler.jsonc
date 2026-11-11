@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "holy-mouse-bc17",
+	"name": "sanchez-auto-detail",
 	"main": "worker/index.ts",
 	"compatibility_date": "2026-11-03",
 	"assets": {
