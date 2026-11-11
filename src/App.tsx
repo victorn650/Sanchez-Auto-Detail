@@ -1,24 +1,159 @@
 import { useState } from 'react'
 import './App.css'
+
 const phone = 'tel:+15551234567'
+
+function Arrow() {
+  return <span aria-hidden="true">→</span>
+}
+
+function Brand() {
+  return (
+    <a className="brand" href="#top" aria-label="Sanchez Auto Detailing home">
+      <span className="brand-mark">S</span>
+      <span><strong>SANCHEZ</strong><small>AUTO DETAILING</small></span>
+    </a>
+  )
+}
+
+function Navigation({ menuOpen, onMenuToggle, onNavigate }: {
+  menuOpen: boolean
+  onMenuToggle: () => void
+  onNavigate: () => void
+}) {
+  return (
+    <nav className="nav container" aria-label="Main navigation">
+      <Brand />
+      <button className="menu-toggle" onClick={onMenuToggle} aria-expanded={menuOpen} aria-label="Toggle menu">
+        <span /><span />
+      </button>
+      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <a href="#services" onClick={onNavigate}>Services</a>
+        <a href="#about" onClick={onNavigate}>Why us</a>
+        <a href="#reviews" onClick={onNavigate}>Reviews</a>
+        <a className="button button-small" href={phone}>Book a detail <Arrow /></a>
+      </div>
+    </nav>
+  )
+}
+
+function Hero({ menuOpen, onMenuToggle, onNavigate }: {
+  menuOpen: boolean
+  onMenuToggle: () => void
+  onNavigate: () => void
+}) {
+  return (
+    <header className="hero" id="top">
+      <div className="hero-image" role="img" aria-label="Black sports car being washed in a detailing studio" />
+      <div className="hero-overlay" />
+      <Navigation menuOpen={menuOpen} onMenuToggle={onMenuToggle} onNavigate={onNavigate} />
+      <div className="hero-content container">
+        <p className="eyebrow"><i /> Premium mobile detailing</p>
+        <h1>Drive clean.<br /><em>Feel different.</em></h1>
+        <p className="hero-copy">Professional auto detailing with obsessive attention to every finish, surface, and reflection.</p>
+        <div className="hero-actions">
+          <a className="button" href={phone}>Schedule your detail <Arrow /></a>
+          <a className="text-link" href="#services">Explore services <Arrow /></a>
+        </div>
+      </div>
+      <div className="metrics container">
+        <div><strong>4.9</strong><span>Google rating</span></div>
+        <div><strong>500+</strong><span>Cars detailed</span></div>
+        <div><strong>100%</strong><span>Satisfaction</span></div>
+      </div>
+    </header>
+  )
+}
+
 const services = [
   { number: '01', title: 'Exterior Detail', price: 'From $149', text: 'A meticulous hand wash, paint decontamination, wheel care, and premium protection for a deep, lasting shine.' },
   { number: '02', title: 'Interior Detail', price: 'From $179', text: 'Deep vacuuming, steam cleaning, leather conditioning, and precise finishing across every surface and seam.' },
   { number: '03', title: 'Full Detail', price: 'From $289', text: 'Our complete inside-and-out reset. The ideal choice when your vehicle deserves the full Sanchez treatment.' },
 ]
-function Arrow() { return <span aria-hidden="true">→</span> }
+
+function Services() {
+  return (
+    <section className="section services container" id="services">
+      <div className="section-intro">
+        <div><p className="eyebrow dark"><i /> Our services</p><h2>More than clean.<br /><em>Meticulously restored.</em></h2></div>
+        <p>Every service is performed with professional-grade products and a standard of care that treats your vehicle like our own.</p>
+      </div>
+      <div className="service-grid">
+        {services.map((service) => (
+          <article className="service-card" key={service.number}>
+            <span className="service-number">{service.number}</span>
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+            <div className="service-footer"><strong>{service.price}</strong><a href={phone} aria-label={`Book ${service.title}`}>Book now <Arrow /></a></div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Standard() {
+  return (
+    <section className="standard" id="about">
+      <div className="standard-image" role="img" aria-label="Detailer applying foam to a black sports car"><span className="experience"><strong>7+</strong><small>Years of experience</small></span></div>
+      <div className="standard-copy">
+        <p className="eyebrow dark"><i /> The Sanchez standard</p>
+        <h2>Details make<br /><em>the difference.</em></h2>
+        <p>We built Sanchez Auto Detailing around one simple belief: your car should leave looking better than you thought possible.</p>
+        <ul><li>Professional-grade products</li><li>Fully mobile and convenient</li><li>Licensed, insured, and trusted</li></ul>
+        <a className="button button-dark" href={phone}>Get your free quote <Arrow /></a>
+      </div>
+    </section>
+  )
+}
+
+function Reviews() {
+  return (
+    <section className="review" id="reviews">
+      <div className="quote-mark">“</div>
+      <blockquote>My car looks better than the day I bought it. The attention to detail is unmatched—and they came right to my driveway.</blockquote>
+      <div className="reviewer"><span>JM</span><div><strong>Jordan M.</strong><small>Full detail customer</small></div></div>
+    </section>
+  )
+}
+
+function CallToAction() {
+  return (
+    <section className="cta">
+      <p className="eyebrow"><i /> Ready when you are</p>
+      <h2>Give your car the care<br /><em>it deserves.</em></h2>
+      <p>Call or text us for a fast, free quote.</p>
+      <a className="button" href={phone}>Call (555) 123–4567 <Arrow /></a>
+    </section>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="footer container">
+      <Brand />
+      <p>Premium mobile detailing.<br />Proudly serving our local community.</p>
+      <small>© 2025 Sanchez Auto Detailing</small>
+    </footer>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  return <div className="site-shell">
-    <header className="hero" id="top"><div className="hero-image" role="img" aria-label="Black sports car being washed in a detailing studio" /><div className="hero-overlay" />
-      <nav className="nav container" aria-label="Main navigation"><a className="brand" href="#top" aria-label="Sanchez Auto Detailing home"><span className="brand-mark">S</span><span><strong>SANCHEZ</strong><small>AUTO DETAILING</small></span></a><button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu"><span /><span /></button><div className={`nav-links ${menuOpen ? 'open' : ''}`}><a href="#services" onClick={() => setMenuOpen(false)}>Services</a><a href="#about" onClick={() => setMenuOpen(false)}>Why us</a><a href="#reviews" onClick={() => setMenuOpen(false)}>Reviews</a><a className="button button-small" href={phone}>Book a detail <Arrow /></a></div></nav>
-      <div className="hero-content container"><p className="eyebrow"><i /> Premium mobile detailing</p><h1>Drive clean.<br /><em>Feel different.</em></h1><p className="hero-copy">Professional auto detailing with obsessive attention to every finish, surface, and reflection.</p><div className="hero-actions"><a className="button" href={phone}>Schedule your detail <Arrow /></a><a className="text-link" href="#services">Explore services <Arrow /></a></div></div>
-      <div className="metrics container"><div><strong>4.9</strong><span>Google rating</span></div><div><strong>500+</strong><span>Cars detailed</span></div><div><strong>100%</strong><span>Satisfaction</span></div></div>
-    </header>
-    <main><section className="section services container" id="services"><div className="section-intro"><div><p className="eyebrow dark"><i /> Our services</p><h2>More than clean.<br /><em>Meticulously restored.</em></h2></div><p>Every service is performed with professional-grade products and a standard of care that treats your vehicle like our own.</p></div><div className="service-grid">{services.map((service) => <article className="service-card" key={service.number}><span className="service-number">{service.number}</span><h3>{service.title}</h3><p>{service.text}</p><div className="service-footer"><strong>{service.price}</strong><a href={phone} aria-label={`Book ${service.title}`}>Book now <Arrow /></a></div></article>)}</div></section>
-      <section className="standard" id="about"><div className="standard-image" role="img" aria-label="Detailer applying foam to a black sports car"><span className="experience"><strong>7+</strong><small>Years of experience</small></span></div><div className="standard-copy"><p className="eyebrow dark"><i /> The Sanchez standard</p><h2>Details make<br /><em>the difference.</em></h2><p>We built Sanchez Auto Detailing around one simple belief: your car should leave looking better than you thought possible.</p><ul><li>Professional-grade products</li><li>Fully mobile and convenient</li><li>Licensed, insured, and trusted</li></ul><a className="button button-dark" href={phone}>Get your free quote <Arrow /></a></div></section>
-      <section className="review" id="reviews"><div className="quote-mark">“</div><blockquote>My car looks better than the day I bought it. The attention to detail is unmatched—and they came right to my driveway.</blockquote><div className="reviewer"><span>JM</span><div><strong>Jordan M.</strong><small>Full detail customer</small></div></div></section><section className="cta"><p className="eyebrow"><i /> Ready when you are</p><h2>Give your car the care<br /><em>it deserves.</em></h2><p>Call or text us for a fast, free quote.</p><a className="button" href={phone}>Call (555) 123–4567 <Arrow /></a></section></main>
-    <footer className="footer container"><a className="brand" href="#top"><span className="brand-mark">S</span><span><strong>SANCHEZ</strong><small>AUTO DETAILING</small></span></a><p>Premium mobile detailing.<br />Proudly serving our local community.</p><small>© 2025 Sanchez Auto Detailing</small></footer>
-  </div>
+  const closeMenu = () => setMenuOpen(false)
+
+  return (
+    <div className="site-shell">
+      <Hero menuOpen={menuOpen} onMenuToggle={() => setMenuOpen(!menuOpen)} onNavigate={closeMenu} />
+      <main>
+        <Services />
+        <Standard />
+        <Reviews />
+        <CallToAction />
+      </main>
+      <Footer />
+    </div>
+  )
 }
+
 export default App
