@@ -6,9 +6,9 @@ export function Arrow() {
 
 export function Brand() {
   return (
-    <a className="brand" href="#top" aria-label="Sanchez Auto Detailing home">
+    <a className="brand" href="#top" aria-label="Superior Auto Detail home">
       <span className="brand-mark">S</span>
-      <span><strong>SANCHEZ</strong><small>AUTO DETAILING</small></span>
+      <span><strong>SUPERIOR</strong><small>AUTO DETAIL</small></span>
     </a>
   )
 }
