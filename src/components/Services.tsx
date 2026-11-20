@@ -4,7 +4,7 @@ import { Arrow, phone } from './shared'
 const services = [
   { number: '01', title: 'Exterior Detail', price: 'From $149', text: 'A meticulous hand wash, paint decontamination, wheel care, and premium protection for a deep, lasting shine.' },
   { number: '02', title: 'Interior Detail', price: 'From $179', text: 'Deep vacuuming, steam cleaning, leather conditioning, and precise finishing across every surface and seam.' },
-  { number: '03', title: 'Full Detail', price: 'From $289', text: 'Our complete inside-and-out reset. The ideal choice when your vehicle deserves the full Sanchez treatment.' },
+  { number: '03', title: 'Full Detail', price: 'From $289', text: 'Our complete inside-and-out reset. The ideal choice when your vehicle deserves the full Superior treatment.' },
 ]
 
 export function Services() {
